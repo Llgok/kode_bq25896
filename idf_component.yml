@@ -1,4 +1,4 @@
-version: "1.0.0"
+version: "1.0.1"
 description: BQ25896 - Power Management Integrated Circuit (PMIC)
 url: https://github.com/kodediy/kode_bq25896
 repository: https://github.com/kodediy/kode_bq25896.git

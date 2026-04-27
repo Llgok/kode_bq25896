@@ -57,6 +57,7 @@ namespace Kode_Bq25896
     .chg_config = BQ25896_CHG_ENABLE,            /* Charge enabled (default) */                                 \
     .sys_min = BQ25896_SYS_MIN_3500MV,           /* 3.5V (default) */                                           \
     .min_vbat_sel = BQ25896_MIN_VBAT_2900MV,     /* 2.9V (default) */                                           \
+    .en_pumpx = BQ25896_PUMPX_DISABLE,           /* 电流脉冲控制默认关闭 */                   \
     .ichg = BQ25896_ICHG_2048MA,                 /* 2048mA (default) */                                         \
     .iprechg = BQ25896_PRECHG_128MA,             /* 128mA (default) */                                          \
     .iterm = BQ25896_ITERM_256MA,                /* 256mA (default) */                                          \
@@ -72,6 +73,7 @@ namespace Kode_Bq25896
     .bat_comp = BQ25896_BAT_COMP_0MO,            /* IR compensation disabled (default) */                       \
     .vclamp = BQ25896_VCLAMP_0MV,                /* IR compensation voltage clamp disabled (default) */         \
     .treg = BQ25896_TREG_120C,                   /* 120C (default) */                                           \
+    .force_ico = BQ25896_ICO_NOT_FORCE,         /* 强制 ICO 默认停止 */                           \
     .tmr2x_en = BQ25896_TMR2X_ENABLE,            /* Timer2x enabled (default) */                                \
     .batfet_dis = BQ25896_BATFET_ENABLE,         /* BatteryFET enabled (default) */                             \
     .jeita_vset = BQ25896_JEITA_VSET_REDUCED,    /* Charge Voltage VREG-200mV (default) */                      \

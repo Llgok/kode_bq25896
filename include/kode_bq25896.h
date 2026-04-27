@@ -10,14 +10,14 @@
 #include "cpp_bus_driver_library.h"
 #include "esp_err.h"
 
-namespace Kode_Bq25896
+namespace kode_bq25896
 {
     /**
      * @brief Handle to BQ25896 device
      */
     typedef struct bq25896_dev_t *bq25896_handle_t;
 
-    esp_err_t bq25896_init(std::shared_ptr<Cpp_Bus_Driver::Bus_Iic_Guide> bus, bq25896_handle_t handle);
+    esp_err_t bq25896_init(std::shared_ptr<cpp_bus_driver::BusI2cGuide> bus, bq25896_handle_t handle);
 
     /**
      * @brief Delete the BQ25896 driver instance and free resources
@@ -1548,7 +1548,7 @@ namespace Kode_Bq25896
      */
     struct bq25896_dev_t
     {
-        std::shared_ptr<Cpp_Bus_Driver::Bus_Iic_Guide> bus;
+        std::shared_ptr<cpp_bus_driver::BusI2cGuide> bus_;
 
         bq25896_config_t config; /*!< Current configuration */
     };

@@ -13,7 +13,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
-namespace Kode_Bq25896
+namespace kode_bq25896
 {
 #define TAG "bq25896 Driver"
 
@@ -21,7 +21,7 @@ namespace Kode_Bq25896
     static esp_err_t bq25896_write_reg(bq25896_handle_t handle, uint8_t reg, uint8_t data);
     static esp_err_t bq25896_update_bits(bq25896_handle_t handle, uint8_t reg, uint8_t mask, uint8_t value);
 
-    esp_err_t bq25896_init(std::shared_ptr<Cpp_Bus_Driver::Bus_Iic_Guide> bus, bq25896_handle_t handle)
+    esp_err_t bq25896_init(std::shared_ptr<cpp_bus_driver::BusI2cGuide> bus, bq25896_handle_t handle)
     {
         ESP_RETURN_ON_FALSE(bus != NULL, ESP_ERR_INVALID_ARG, TAG, "Invalid I2C bus handle");
         ESP_RETURN_ON_FALSE(handle != NULL, ESP_ERR_INVALID_ARG, TAG, "Invalid output handle");
@@ -29,13 +29,13 @@ namespace Kode_Bq25896
         // Initialize with default configuration
         handle->config = BQ25896_DEFAULT_CONFIG();
 
-        if (bus->begin(-1, handle->config.dev_addr) == false)
+        if (!bus->Init(-1, handle->config.dev_addr))
         {
             ESP_LOGE(TAG, "bq25896_init fail");
             return ESP_FAIL;
         }
 
-        handle->bus = bus;
+        handle->bus_ = bus;
 
         // Try to read device part number to confirm the device is accessible
         uint8_t part_number = 0;
@@ -2053,7 +2053,7 @@ namespace Kode_Bq25896
         uint8_t buffer = 0;
 
         // Use the device handle that's already stored in the structure
-        if (handle->bus->write_read(&reg, 1, &buffer, 1) == false)
+        if (!handle->bus_->WriteRead(&reg, 1, &buffer, 1))
         {
             ESP_LOGE(TAG, "Failed to read register 0x%02X", reg);
             return ESP_FAIL;
@@ -2074,7 +2074,7 @@ namespace Kode_Bq25896
         uint8_t write_buf[2] = {reg, data};
 
         // Use the persistent device handle from the structure
-        if (handle->bus->write(write_buf, sizeof(write_buf)) == false)
+        if (!handle->bus_->Write(write_buf, sizeof(write_buf)))
         {
             ESP_LOGE(TAG, "Failed to write register 0x%02X with value 0x%02X", reg, data);
             return ESP_FAIL;
